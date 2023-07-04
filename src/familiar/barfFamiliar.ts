@@ -138,52 +138,7 @@ function calculateOutfitValue(f: GeneralFamiliar): MarginalFamiliar {
   return { ...f, outfitValue, outfitWeight };
 }
 export function barfFamiliar(): Familiar {
-  if (timeToMeatify()) return $familiar`Grey Goose`;
-  if (get("garbo_IgnoreMarginalFamiliars", false)) return meatFamiliar();
-
-  const fullMenu = menu({
-    canChooseMacro: true,
-    location: $location`Barf Mountain`,
-    includeExperienceFamiliars: false,
-  }).map(calculateOutfitValue);
-
-  const meatFamiliarEntry = fullMenu.find(({ familiar }) => familiar === meatFamiliar());
-
-  if (!meatFamiliarEntry) throw new Error("Something went wrong when initializing familiars!");
-
-  const meatFamiliarValue = totalFamiliarValue(meatFamiliarEntry);
-  const viableMenu = fullMenu.filter((f) => totalFamiliarValue(f) > meatFamiliarValue);
-
-  if (viableMenu.every(({ limit }) => limit !== "none")) {
-    const turnsNeeded = sum(viableMenu, (option: MarginalFamiliar) =>
-      turnsNeededForFamiliar(option, meatFamiliarEntry)
-    );
-
-    if (turnsNeeded < turnsAvailable()) {
-      const shrubAvailable = viableMenu.some(
-        ({ familiar }) => familiar === $familiar`Crimbo Shrub`
-      );
-      return shrubAvailable ? $familiar`Crimbo Shrub` : meatFamiliar();
-    }
-  }
-
-  if (viableMenu.length === 0) return meatFamiliar();
-
-  const best = maxBy(viableMenu, totalFamiliarValue);
-
-  const familiarPrintout = (x: MarginalFamiliar) =>
-    `(expected value of ${x.expectedValue.toFixed(1)} from familiar drops, ${familiarAbilityValue(
-      x.familiar
-    ).toFixed(1)} from familiar abilities and ${x.outfitValue.toFixed(1)} from outfit)`;
-
-  print(
-    `Choosing to use ${best.familiar} ${familiarPrintout(best)} over ${
-      meatFamiliarEntry.familiar
-    } ${familiarPrintout(meatFamiliarEntry)}.`,
-    HIGHLIGHT
-  );
-
-  return best.familiar;
+    return $familiar`Patriotic Eagle`;
 }
 
 function getSpecialFamiliarLimit({
