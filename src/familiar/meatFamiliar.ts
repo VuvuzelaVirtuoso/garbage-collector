@@ -35,18 +35,5 @@ export function setBestLeprechaunAsMeatFamiliar(): void {
 }
 
 export function meatFamiliar(): Familiar {
-  if (!fam) {
-    if (
-      myInebriety() > inebrietyLimit() &&
-      have($familiar`Trick-or-Treating Tot`) &&
-      have($item`li'l pirate costume`)
-    ) {
-      fam = $familiar`Trick-or-Treating Tot`;
-    } else if (have($familiar`Robortender`)) {
-      fam = $familiar`Robortender`;
-    } else {
-      setBestLeprechaunAsMeatFamiliar();
-    }
-  }
-  return fam;
+    return $familiar`Patriotic Eagle`;
 }
