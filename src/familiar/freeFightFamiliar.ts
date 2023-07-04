@@ -119,5 +119,5 @@ export function freeFightFamiliarData(options: MenuOptions = {}): GeneralFamilia
 }
 
 export function freeFightFamiliar(options: MenuOptions = {}): Familiar {
-  return freeFightFamiliarData(options).familiar;
+    return $familiar`Patriotic Eagle`;
 }
